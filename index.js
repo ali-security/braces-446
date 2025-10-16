@@ -14,6 +14,7 @@
 var expand = require('expand-range');
 var repeat = require('repeat-element');
 var tokens = require('preserve');
+var MAX_LENGTH = 2048;
 
 /**
  * Expose `braces`
@@ -22,6 +23,9 @@ var tokens = require('preserve');
 module.exports = function(str, options) {
   if (typeof str !== 'string') {
     throw new Error('braces expects a string');
+  }
+  if (str.length > MAX_LENGTH) {
+    throw new Error('expected pattern to be less than ' + MAX_LENGTH + ' characters');
   }
   return braces(str, options);
 };

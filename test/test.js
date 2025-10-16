@@ -18,6 +18,13 @@ if ('minimatch' in argv) {
 
 describe('braces', function() {
   describe('brace expansion', function() {
+    it('should throw an error when string exceeds max safe length', function() {
+      var MAX_LENGTH = 2048;
+      (function() {
+        expand(Array(MAX_LENGTH + 2).join('.'));
+      }).should.throw();
+    });
+
     it('should return an empty array when no braces are found', function() {
       expand('').should.eql([]);
     });
